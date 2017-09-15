@@ -63,6 +63,7 @@ function makeHobbits() {
     var listItemHTML = document.createElement("li");
      listOfHobbits.appendChild(listItemHTML);
      listItemHTML.innerText = hobbits[i];
+     listItemHTML.id = hobbits[i];
 
      // give each hobbit a class of hobbit
      listItemHTML.className = "hobbit";
@@ -181,8 +182,7 @@ leaveTheShire();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Part 7 --Do I need to remove them from the old unordered list? 
-//        --Do I need to create a new unordered list or is a list of names all together within the DIV okay?
+// Part 7 --WOO DONE!
 
 function forgeTheFellowShip() {
   // create a new div called 'the-fellowship' within rivendell
@@ -194,83 +194,104 @@ function forgeTheFellowShip() {
     //console.log(rivendell);
 
   // add each hobbit and buddy one at a time to 'the-fellowship'
-  var listOfTheFellowship = document.getElementsByTagName("li"); //getElementById("buddies-list");
-    console.log(listOfTheFellowship);
-    //console.log(listOfTheFellowship.length);
-    //it's not an array! it's a list of objects!
-    //var whatIsIt = typeof(listOfTheFellowship);
-    //console.log(whatIsIt);
+  var listOfTheFellowship = document.querySelectorAll("li"); //getElementById("buddies-list");
 
   for (var i = 0; i < listOfTheFellowship.length; i++) {
-      //listOfTheFellowship.sort();
       //console.log(character);
       fellowship.appendChild(listOfTheFellowship[i]);
-    /*for (var i = 0; i < hobbits.length; i++) {
-      //console.log(hobbits[i]);
-    rivendell.appendChild(hobbits[i]);
-  }*/
 
-    /*var character = listOfTheFellowship[i].textContent;
-    var characterText = document.createTextNode(character);
-    //fellowshipArray.push(character);
-      //console.log(fellowshipArray);
-    fellowship.appendChild(characterText);*/
+    var character = listOfTheFellowship[i].textContent;
 
     // after each character is added make an alert that they have joined your party
-    //alert(character + " has joined the fellowship of the Rings!");
+    alert(character + " has joined the Fellowship of the Rings!");
   }
     
-   console.log(fellowship);
+   //console.log(fellowship);
 }
 
 forgeTheFellowShip();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Part 8
+// Part 8 --WOO DONE!
 
 function theBalrog() {
   // change the 'Gandalf' textNode to 'Gandalf the White'
+  var gandalf = document.getElementById("Gandalf the Grey");
+  gandalf.innerText = "Gandalf the White";
+
   // apply style to the element
   // make the background 'white', add a grey border
+  gandalf.style.backgroundColor = "white";
+  gandalf.style.border = "thin solid grey";
 }
 
 theBalrog();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Part 9
+// Part 9 --WOO DONE!
 
 function hornOfGondor() {
   // pop up an alert that the horn of gondor has been blown
-    //alert("The horn of Gondor has been blown! Boromir's been killed by the Uruk-hai!");
+  alert("The horn of Gondor has been blown!");
 
   // Boromir's been killed by the Uruk-hai!
   // put a linethrough on boromir's name
+  var boromir = document.getElementById("Boromir");
+  boromir.style.textDecoration = "line-through";
+
   // Remove Boromir from the Fellowship
+  var fellowship = document.getElementById("the-fellowship");
+  fellowship.removeChild(boromir);
+  //console.log(fellowship);
 }
 
 hornOfGondor();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Part 10
+// Part 10 --WOO DONE!
 
 function itsDangerousToGoAlone(){
-  // take Frodo and Sam out of the fellowship and move them to Mordor
   // add a div with an id of 'mount-doom' to Mordor
+  var mountDoom = document.createElement("div");
+  mountDoom.id = "mount-doom";
+  var mordor = document.getElementById(lands[2]);
+  mordor.appendChild(mountDoom);
+
+  // take Frodo and Sam out of the fellowship and move them to Mordor
+  var frodo = document.getElementById("Frodo Baggins");
+  var sam = document.getElementById("Samwise 'Sam' Gamgee");
+    // console.log(frodo);
+    // console.log(sam);
+  mordor.appendChild(frodo); 
+  mordor.appendChild(sam); 
 }
 
 itsDangerousToGoAlone();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Part 11
+// Part 11 --WOO DONE!
 
 function weWantsIt() {
   // Create a div with an id of 'gollum' and add it to Mordor
+  var gollum = document.createElement("div");
+  gollum.id = "gollum";
+  var mordor = document.getElementById(lands[2]);
+  mordor.appendChild(gollum);
+    //console.log(mordor);
+
   // Remove the ring from Frodo and give it to Gollum
+  var frodo = document.getElementById("Frodo Baggins");
+    //console.log(frodo);
+  var ring = document.getElementById("the-ring");
+  gollum.appendChild(ring);
+
   // Move Gollum into Mount Doom
+  var mountDoom = document.getElementById("mount-doom");
+  mountDoom.appendChild(gollum);
 }
 
 weWantsIt();
@@ -281,8 +302,43 @@ weWantsIt();
 
 function thereAndBackAgain() {
   // remove Gollum and the Ring from the document
-  // remove all the baddies from the document
+  var gollum = document.getElementById("gollum");
+  var theRing = document.getElementById("the-ring");
+  gollum.removeChild(theRing);
+
+  var mountDoom = document.getElementById("mount-doom");
+  mountDoom.removeChild(gollum); 
+
+  // remove all the buddies from the document
+  var buddiesQuery = document.querySelectorAll(".buddies");
+  var theFellowship = document.getElementById("the-fellowship");
+
+   for (var i = 0; i < buddiesQuery.length; i++) {
+     theFellowship.removeChild(buddiesQuery[i]);
+   }
+  
   // Move all the hobbits back to the shire
+  var allOfTheHobbits = document.querySelectorAll(".hobbits");
+  var theShire = document.getElementById(lands[0]);
+    console.log(allOfTheHobbits);
+    console.log(theShire);
+
+  // for (var i = 0; i < allOfTheHobbits.length; i++) {
+
+  // }
+
+  /*// add each hobbit and buddy one at a time to 'the-fellowship'
+  var listOfTheFellowship = document.querySelectorAll("li"); //getElementById("buddies-list");
+
+  for (var i = 0; i < listOfTheFellowship.length; i++) {
+      //console.log(character);
+      fellowship.appendChild(listOfTheFellowship[i]);
+
+    var character = listOfTheFellowship[i].textContent;
+
+    // after each character is added make an alert that they have joined your party
+    alert(character + " has joined the Fellowship of the Rings!");
+  }*/
 }
 
 thereAndBackAgain();
